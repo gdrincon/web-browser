@@ -12,8 +12,15 @@ public class Application {
 
         int option;
         ApplicationMenu app = new ApplicationMenu();
-        app.showMainMenu();
-        option = app.option();
+        Browser browser = new Browser();
+
+        do {
+            System.out.println(browser.getUrl());
+            app.showMainMenu();
+            option = app.setOptionNumber();
+            app.selectOption(browser, option);
+
+        } while(option != 0);
 
     }
 }

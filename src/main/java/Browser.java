@@ -1,12 +1,17 @@
+import java.util.Date;
 import java.util.Scanner;
+import java.util.Stack;
 
 public class Browser {
-    private String url;
 
+    private String url;
+    private Date date;
+    private Stack<String> browserStack = new Stack<>();
 
 
     public Browser() {
-        this.url=url;
+
+
     }
 
     public String getUrl() {
@@ -15,6 +20,14 @@ public class Browser {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate() {
+        date=new Date();
     }
 
     public String inputUrl() {
@@ -30,12 +43,24 @@ public class Browser {
     }
 
     public void goToUrl(String url) {
+
+        setUrl(url);
+        setDate();
+
+        browserStack.push(getUrl());
+        System.out.println(browserStack);
     }
 
     public void goBack() {
+
+        browserStack.pop();
+        System.out.println(browserStack);
     }
 
     public void goForward() {
+
+        browserStack.push(getUrl());
+        System.out.println(browserStack);
     }
 
     public void seeBookmark() {
@@ -53,5 +78,9 @@ public class Browser {
     public void removeBookmark(String s) {
     }
 
-
+    @Override
+    public String toString() {
+        return "url: '" + url + '\'' +
+                ", data: " + date;
+    }
 }

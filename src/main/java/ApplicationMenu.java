@@ -15,8 +15,8 @@ public class ApplicationMenu {
         System.out.println("********** MENU PRINCIPAL **********");
         System.out.println("*        ******************        *");
         System.out.println("************************************");
-        System.out.println("*           Anar a [1]             *");
-        System.out.println("*           Enrere [2]             *");
+        System.out.println("*            Anar a [1]            *");
+        System.out.println("*            Enrere [2]            *");
         System.out.println("*           Endavant [3]           *");
         System.out.println("*  Afegir a adreces d'interès [4]  *");
         System.out.println("* Eliminar d'adreces d'interès [5] *");
@@ -25,11 +25,11 @@ public class ApplicationMenu {
         System.out.println("*     Veure nombre visites [8]     *");
         System.out.println("*            Sortir [0]            *");
         System.out.println("************************************");
-        System.out.println("*         Escull una opció [?]     *");
+        System.out.println("*        Escull una opció [?]      *");
         System.out.println("************************************");
     }
 
-    public int option() {
+    public int setOptionNumber() {
 
         Scanner input = new Scanner(System.in);
         int option = 0;
@@ -72,9 +72,10 @@ public class ApplicationMenu {
                 browser.seeMostVisited();
                 break;
             case 0:
+                System.out.println("Gràcies per la teva visita!");
                 break;
             default:
-                System.out.println("Opcio incorrecta");
+                System.out.println("Opció incorrecta!");
                 break;
         }
     }
