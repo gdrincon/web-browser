@@ -1,13 +1,15 @@
-import java.util.Date;
-import java.util.Scanner;
-import java.util.Stack;
+import java.util.*;
+
 
 public class Browser {
 
     private String url;
     private Date date;
-    private Stack<String> browserStack = new Stack<>();
-
+    private Deque<String> browserBack = new ArrayDeque<>();
+    private Deque<String> browserForward = new ArrayDeque<>();
+    private Set<String> bookmarks = new LinkedHashSet<>();
+    private Map<String, Date>  history = new LinkedHashMap<>();
+    private Map<Integer, String>  mostVisited = new LinkedHashMap<>();
 
     public Browser() {
 
@@ -30,52 +32,66 @@ public class Browser {
         date=new Date();
     }
 
-    public String inputUrl() {
-        String url;
-        Scanner kb = new Scanner(System.in);
-
-        do {
-            System.out.print("URL: ");
-            url = kb.nextLine();
-        } while (url.isEmpty());
-
-        return url;
-    }
-
     public void goToUrl(String url) {
 
         setUrl(url);
         setDate();
+        browserBack.push(getUrl());
+        history.put(getUrl(), getDate());
 
-        browserStack.push(getUrl());
-        System.out.println(browserStack);
     }
 
     public void goBack() {
 
-        browserStack.pop();
-        System.out.println(browserStack);
+        if (browserBack.peek() != null) {
+            browserForward.push(browserBack.peek());
+            browserBack.pop();
+            setUrl(browserBack.peek());
+        }
+    }
+
+    public Deque getGoBack() {
+        return browserBack;
     }
 
     public void goForward() {
 
-        browserStack.push(getUrl());
-        System.out.println(browserStack);
+        if (browserForward.peek() != null) {
+            browserBack.push(browserForward.peek());
+            setUrl(browserForward.peek());
+            browserForward.pop();
+        } else {
+            setUrl(browserBack.peek());
+        }
     }
 
-    public void seeBookmark() {
+    public Deque getGoForward() {
+        return browserForward;
     }
 
-    public void seeHistory() {
+    public void getBookmarks() {
+        System.out.println(bookmarks);
     }
 
-    public void seeMostVisited() {
+    public void getHistory() {
+
+        System.out.println(history.toString());
     }
 
-    public void addBookmark(String s) {
+    public void getMostVisited() {
+        System.out.println(mostVisited);
+    }
+
+    public void addBookmark() {
+
+        bookmarks.add(getUrl());
     }
 
     public void removeBookmark(String s) {
+
+        if (bookmarks.contains(getUrl())) {
+            bookmarks.remove(getUrl());
+        }
     }
 
     @Override

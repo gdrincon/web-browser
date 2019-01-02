@@ -15,10 +15,11 @@ public class Application {
         Browser browser = new Browser();
 
         do {
-            System.out.println(browser.getUrl());
+
             app.showMainMenu();
             option = app.setOptionNumber();
             app.selectOption(browser, option);
+            app.printBrowser(browser);
 
         } while(option != 0);
 

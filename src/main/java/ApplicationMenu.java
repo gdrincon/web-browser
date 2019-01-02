@@ -43,11 +43,32 @@ public class ApplicationMenu {
         return option;
     }
 
+    public String inputUrl() {
+        String url;
+        Scanner kb = new Scanner(System.in);
+
+        do {
+            System.out.print("URL: ");
+            url = kb.nextLine();
+        } while (url.isEmpty());
+
+        return url;
+    }
+
+    public void printBrowser(Browser browser) {
+
+        System.out.println(" ");
+        System.out.println(browser.getUrl());
+        System.out.println(browser.getGoBack());
+        System.out.println(browser.getGoForward());
+
+    }
+
     public void selectOption(Browser browser, int option) {
 
         switch (option) {
             case 1:
-                String url = browser.inputUrl();
+                String url = inputUrl();
                 browser.goToUrl(url);
                 break;
             case 2:
@@ -57,19 +78,21 @@ public class ApplicationMenu {
                 browser.goForward();
                 break;
             case 4:
-                browser.addBookmark(browser.getUrl());
+                browser.addBookmark();
+                System.out.println("La pàgina web s'ha afegit correctament a favorits");
                 break;
             case 5:
                 browser.removeBookmark(browser.getUrl());
+                System.out.println("La pàgina web s'ha eliminat correctament de favorits");
                 break;
             case 6:
-                browser.seeBookmark();
+                browser.getBookmarks();
                 break;
             case 7:
-                browser.seeHistory();
+                browser.getHistory();
                 break;
             case 8:
-                browser.seeMostVisited();
+                browser.getMostVisited();
                 break;
             case 0:
                 System.out.println("Gràcies per la teva visita!");
